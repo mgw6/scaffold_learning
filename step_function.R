@@ -1,22 +1,7 @@
 
-"
-test_sqr <- function(x)
-{
-  jack = vector(double, 2)
-  #[]
-  return(jack)
-}
-
-test_sqr(5)
-
-vector1 = c(1,2,3)
-vector1
-"
-
-
 next_l <- function(l_n, h_n, r_l, d)
 {
-  return(l_n + (r_l*l_n)(1 - l_n/h_n)(d - h_n/l_n))
+  return(l_n + (r_l*l_n)*(1 - l_n/h_n)*(d - h_n/l_n))
 }
 
 next_h <- function(l_n, h_n, r_h, p_n)
@@ -51,10 +36,18 @@ calc_trajectory <- function(l_0, h_0, r_l, r_h, d, num_steps=1000)
     l_traj[n] = next_l(l_traj[n-1], h_traj[n-1], r_l, d)
     next_h(l_traj[n-1], h_traj[n-1], r_h, l_traj[n-2] )
   }
-  return (c(l_traj, h_traj))
+  
+  print(l_traj)
+  print(h_traj)
+  return (array(C(l_traj, h_traj), dim = (c(2, num_steps))))
 }
 
 
-calc_trajectory(0,.5, .1, .1, .05, num_steps = 5)
+jack = calc_trajectory(.01,.1,.05,.05,.5,4)
+jack
+length(jack)
+
+
+
 
 
