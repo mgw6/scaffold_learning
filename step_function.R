@@ -19,34 +19,31 @@ next_step <- function(l_n, h_n, r_l, d, r_h, p_n)
 }
 
 calc_trajectory <- function(l_0, h_0, r_l, r_h, d, num_steps=1000)
-{
-  
+{ #add l_-1
   if (num_steps <3) stop("Num_steps must be >=3.")
   
+  num_steps = num_steps+1
   l_traj = c(size = num_steps)
   h_traj = c(size = num_steps)
+  
   l_traj[1] = l_0
   h_traj[1] = h_0
-  
   l_traj[2] = next_l(l_traj[1], h_traj[1], r_l, d)
   h_traj[2] = next_h(l_traj[1], h_traj[1], r_h, l_traj[1] )
   
-  for (n in 3: num_steps)
+  for (n in 3:num_steps)
   {
     l_traj[n] = next_l(l_traj[n-1], h_traj[n-1], r_l, d)
     h_traj[n] = next_h(l_traj[n-1], h_traj[n-1], r_h, l_traj[n-2] )
   }
-  
   print(l_traj)
   print(h_traj)
-  #Dear Python, please come back 
+  
   return (matrix(c(l_traj, h_traj),  nrow = num_steps, ncol = 2, byrow = FALSE))
 }
 
-#Ask Dr. Green about discrepancies between R and Excel
-test_result = calc_trajectory(.01,.1,.05,.05,.5,5)
+#Add third column to count time step, because it starts at n = 1
+test_result = calc_trajectory(.01,.1,.05,.05,.5,10)
 print(test_result)
-print(test_result[, 2])
-
 
 
