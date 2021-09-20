@@ -18,7 +18,7 @@ next_step <- function(l_n, h_n, r_l, d, r_h, p_n)
   return (next_step)
 }
 
-calc_trajectory <- function(l_0, h_0, r_l, r_h, d, num_steps=1000)
+calc_trajectory <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, num_steps=1000)
 { #add l_-1
   if (num_steps <3) stop("Num_steps must be >=3.")
   
@@ -29,7 +29,13 @@ calc_trajectory <- function(l_0, h_0, r_l, r_h, d, num_steps=1000)
   l_traj[1] = l_0
   h_traj[1] = h_0
   l_traj[2] = next_l(l_traj[1], h_traj[1], r_l, d)
-  h_traj[2] = next_h(l_traj[1], h_traj[1], r_h, l_traj[1] )
+  
+  if (is.null(l_n1)) 
+  {
+    h_traj[2] = next_h(l_traj[1], h_traj[1], r_h, l_traj[1] )
+  } else {
+    h_traj[2] = next_h(l_traj[1], h_traj[1], r_h, l_n1 )
+  }
   
   for (n in 3:num_steps)
   {
@@ -43,7 +49,8 @@ calc_trajectory <- function(l_0, h_0, r_l, r_h, d, num_steps=1000)
 }
 
 #Add third column to count time step, because it starts at n = 1
-test_result = calc_trajectory(.01,.1,.05,.05,.5,10)
+test_result = calc_trajectory(.01, .015, .05, .05, 2, num_steps = 5)
 print(test_result)
 
+plot(test_result[,1], test_result[,2])
 
