@@ -18,6 +18,7 @@ next_step <- function(l_n, h_n, r_l, d, r_h, p_n)
   return (next_step)
 }
 
+
 calc_trajectory <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, num_steps=1000)
 { 
   if (num_steps <3) stop("Num_steps must be >=3.")
@@ -47,28 +48,84 @@ calc_trajectory <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, num_steps=1000)
   return (cbind(n,l_traj, h_traj))
 }
 
+
+
 many_trajectories <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, n_steps=1000)
 {
-  if(is.vector(l_0))
+  
+  
+  if(length(l_0) > 1)
   {
     result_l = matrix(data = NA, nrow = (n_steps+1), ncol = length(l_0))
     result_h = matrix(data = NA, nrow = (n_steps+1), ncol = length(l_0))
-    
     for (count in (1:length(l_0)))
     {
-        #print(count)
         one_traj_result = calc_trajectory(l_0[count], h_0, r_l, r_h, d, l_n1, num_steps = n_steps )
         result_l[,count] = one_traj_result[,2]
         result_h[,count] = one_traj_result[,3]
     }
-  } else if (is.vector(h_0)) {
-    stop("Coming Soon!")
-  } else if (is.vector(r_l)) {
-    stop("Coming Soon!")
-  } else if (is.vector(r_h)) {
-    stop("Coming Soon!")
-  } else if (is.vector(l_n1)) {
-    stop("Coming Soon!")
+  } else if (length(h_0) > 1) {
+    result_l = matrix(data = NA, nrow = (n_steps+1), ncol = length(h_0))
+    result_h = matrix(data = NA, nrow = (n_steps+1), ncol = length(h_0))
+    
+    for (count in (1:length(h_0)))
+    {
+      one_traj_result = calc_trajectory(l_0, h_0[count], r_l, r_h, d, l_n1, num_steps = n_steps )
+      result_l[,count] = one_traj_result[,2]
+      result_h[,count] = one_traj_result[,3]
+    }
+    
+    
+  } else if (length(r_l) > 1) {
+    
+    result_l = matrix(data = NA, nrow = (n_steps+1), ncol = length(r_l))
+    result_h = matrix(data = NA, nrow = (n_steps+1), ncol = length(r_l))
+    
+    for (count in (1:length(r_l)))
+    {
+      one_traj_result = calc_trajectory(l_0, h_0, r_l[count], r_h, d, l_n1, num_steps = n_steps )
+      result_l[,count] = one_traj_result[,2]
+      result_h[,count] = one_traj_result[,3]
+    }
+    
+    
+  } else if (length(r_h) > 1) {
+    
+    result_l = matrix(data = NA, nrow = (n_steps+1), ncol = length(r_h))
+    result_h = matrix(data = NA, nrow = (n_steps+1), ncol = length(r_h))
+    
+    for (count in (1:length(r_h)))
+    {
+      one_traj_result = calc_trajectory(l_0, h_0, r_l, r_h[count], d, l_n1, num_steps = n_steps )
+      result_l[,count] = one_traj_result[,2]
+      result_h[,count] = one_traj_result[,3]
+    }
+    
+    
+  } else if (length(d) > 1) {
+    
+    result_l = matrix(data = NA, nrow = (n_steps+1), ncol = length(d))
+    result_h = matrix(data = NA, nrow = (n_steps+1), ncol = length(d))
+    
+    for (count in (1:length(d)))
+    {
+      one_traj_result = calc_trajectory(l_0, h_0, r_l, r_h, d[count], l_n1, num_steps = n_steps )
+      result_l[,count] = one_traj_result[,2]
+      result_h[,count] = one_traj_result[,3]
+    }
+    
+  } else if (length(l_n1) > 1) {
+    
+    result_l = matrix(data = NA, nrow = (n_steps+1), ncol = length(l_n1))
+    result_h = matrix(data = NA, nrow = (n_steps+1), ncol = length(l_n1))
+    
+    for (count in (1:length(l_n1)))
+    {
+      one_traj_result = calc_trajectory(l_0, h_0, r_l, r_h, d, l_n1[count], num_steps = n_steps )
+      result_l[,count] = one_traj_result[,2]
+      result_h[,count] = one_traj_result[,3]
+    }
+    
   } else{ 
     stop("Vector not found.")
   }
