@@ -19,7 +19,7 @@ next_step <- function(l_n, h_n, r_l, d, r_h, p_n)
 }
 
 calc_trajectory <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, num_steps=1000)
-{ #add l_-1
+{ 
   if (num_steps <3) stop("Num_steps must be >=3.")
   
   num_steps = num_steps+1
@@ -42,15 +42,37 @@ calc_trajectory <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, num_steps=1000)
     l_traj[n] = next_l(l_traj[n-1], h_traj[n-1], r_l, d)
     h_traj[n] = next_h(l_traj[n-1], h_traj[n-1], r_h, l_traj[n-2] )
   }
-  print(l_traj)
-  print(h_traj)
   
-  return (matrix(c(l_traj, h_traj),  nrow = num_steps, ncol = 2, byrow = FALSE))
+  n = 0:(num_steps-1)
+  return (cbind(n,l_traj, h_traj))
 }
 
-#Add third column to count time step, because it starts at n = 1
-test_result = calc_trajectory(.01, .015, .05, .05, 2, num_steps = 5)
-print(test_result)
+many_trajectories <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, n_steps=1000)
+{
+  if(is.vector(l_0))
+  {
+    result_l = matrix(data = NA, nrow = (n_steps+1), ncol = length(l_0))
+    result_h = matrix(data = NA, nrow = (n_steps+1), ncol = length(l_0))
+    
+    for (count in (1:length(l_0)))
+    {
+        #print(count)
+        one_traj_result = calc_trajectory(l_0[count], h_0, r_l, r_h, d, l_n1, num_steps = n_steps )
+        result_l[,count] = one_traj_result[,2]
+        result_h[,count] = one_traj_result[,3]
+    }
+  } else if (is.vector(h_0)) {
+    stop("Coming Soon!")
+  } else if (is.vector(r_l)) {
+    stop("Coming Soon!")
+  } else if (is.vector(r_h)) {
+    stop("Coming Soon!")
+  } else if (is.vector(l_n1)) {
+    stop("Coming Soon!")
+  } else{ 
+    stop("Vector not found.")
+  }
 
-plot(test_result[,1], test_result[,2])
-
+  return (simplify2array(list(result_l, result_h)))
+  
+}
