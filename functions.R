@@ -60,9 +60,9 @@ many_trajectories <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, n_steps=1000)
     result_h = matrix(data = NA, nrow = (n_steps+1), ncol = length(l_0))
     for (count in (1:length(l_0)))
     {
-        one_traj_result = calc_trajectory(l_0[count], h_0, r_l, r_h, d, l_n1, num_steps = n_steps )
-        result_l[,count] = one_traj_result[,2]
-        result_h[,count] = one_traj_result[,3]
+      one_traj_result = calc_trajectory(l_0[count], h_0, r_l, r_h, d, l_n1, num_steps = n_steps )
+      result_l[,count] = one_traj_result[,2]
+      result_h[,count] = one_traj_result[,3]
     }
   } else if (length(h_0) > 1) {
     result_l = matrix(data = NA, nrow = (n_steps+1), ncol = length(h_0))
@@ -129,7 +129,7 @@ many_trajectories <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, n_steps=1000)
   } else{ 
     stop("Vector not found.")
   }
-
+  
   return (simplify2array(list(result_l, result_h)))
   
 }
