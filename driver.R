@@ -16,7 +16,3 @@ multi_test = many_trajectories(.01,  .05,  .05,  2, 2, l_n1 = seq(0,1,by=.1), n_
 dim(multi_test)
 
 
-
-
-
-

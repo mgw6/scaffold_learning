@@ -2,34 +2,39 @@ source("functions.R")
 library(ggplot2)
 
 df = data.frame(L = NULL, rep_h = NULL)
-L = seq(0,1,by=.1)
-color_list <- c()
-for (H in seq(0,1,by=.1) )
+L = seq(0,1,by=.01)
+
+for (H in seq(0,1,by=.01) )
 {
-  multi_test = many_trajectories(L, H, .05, .05, 2, l_n1 = NULL, n_steps=100)
+  color_list <- c()
+  multi_test = many_trajectories(L, H, .1, .05, 2, l_n1 = NULL, n_steps=100)
+  list_len = length(multi_test[,1,1])
 
   rep_h = rep(c(H), times = length(L))
   
   for (x in (1:length(multi_test[1,,1])))
   {
-    if (!is.finite((multi_test[length(multi_test[,1,1]),x,1])))
+    if (!is.finite(multi_test[list_len,x,1]) || multi_test[list_len,x,1] > 100 )
     {
-      color_list <- append(color_list, "red")
+      color_list <- append(color_list, 'red')
+    } else if 
+    ((multi_test[list_len,x,1] - multi_test[list_len-1,x,1])^2 - 
+     (multi_test[list_len,x,2] - multi_test[list_len-1,x,2])^2  < 
+     (multi_test[list_len-1,x,] - multi_test[list_len-2,x,1])^2 - 
+     (multi_test[list_len-1,x,2] - multi_test[list_len-2,x,2])^2
+    ) 
+      
+    
+    {
+      color_list <- append(color_list, 'green')
     } else { 
-      color_list <- append(color_list, "blue")
+      color_list <- append(color_list, 'blue')
     }
   }
-  df = rbind(df, data.frame(L, rep_h))
+  df = rbind(df, data.frame(L, rep_h, color_list))
 }
 
 df
 color_list
-plot = ggplot(df, aes(L,H, color = color_list, )) + geom_point() 
+plot = ggplot(df, aes(L,rep_h )) + geom_point(colour = df$color_list) 
 plot
-
-
-
-
-
-
-
