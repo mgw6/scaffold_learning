@@ -14,5 +14,5 @@ multi_test = many_trajectories(.01,  .05,  .05,  2, seq(0,1,by=.1), l_n1 = NULL,
 multi_test = many_trajectories(.01,  .05,  .05,  2, 2, l_n1 = seq(0,1,by=.1), n_steps=10)
 
 dim(multi_test)
-
+multi_test
 
