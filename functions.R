@@ -1,3 +1,4 @@
+library(foreach)
 
 next_l <- function(l_n, h_n, r_l, d)
 {
@@ -131,5 +132,6 @@ many_trajectories <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, n_steps=1000)
   }
   
   return (simplify2array(list(result_l, result_h)))
-  
 }
+
+
