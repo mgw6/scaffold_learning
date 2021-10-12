@@ -135,3 +135,12 @@ many_trajectories <- function(l_0, h_0, r_l, r_h, d, l_n1 = NULL, n_steps=1000)
 }
 
 
+list_to_array<-  function(in_array) {
+  d1 = length(par_test[1][[1]])/3
+  d3 = length(par_test)
+  
+  array(as.numeric(unlist(in_array)), dim = c(d1,3, d3))
+}
+#Okay so the above should be useful, now consider this website:
+# https://stackoverflow.com/questions/37433509/convert-list-to-a-matrix-or-array
+# it is a list, but if you manipulate it right to an array you should be fine.
