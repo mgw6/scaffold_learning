@@ -1,22 +1,39 @@
-# This is a driver file to test the functions
-#import functions.trajectory_functions as fxns
+"""
+This is a driver file to test the functions
+Author: MacGregpor Winegard
+Date: 10/19/2021
+"""
+
+
+
 from functions import trajectory_functions as fxns
 import numpy as np
+np.set_printoptions(threshold = np.inf)
+import pandas as pd
 
 #single_test = fxns.calc_trajectory(.01, .015, .05, .05, 2, num_steps = 5)
 
 steps = 1000
-l_span = 10
-h_span = 10
-d_span = 10
+
+l_start = -4
+l_end = 4
+l_step = .1
+l_span = np.arange(l_start, l_end, l_step)
+len_l = int((l_end - l_start)/l_step)
+
+h_start = -4
+h_end = 4
+h_step = .1
+h_span = np.arange(l_start, l_end, l_step)
+len_h = int((h_end - h_start)/h_step)
+
+data = []
 
 
-many_traj = np.empty(shape = (l_span+1, h_span+1, d_span+1, steps+1, 2), dtype = np.float64)
+many_traj = np.empty(shape = (len_l+1, len_h+1, steps+1, 2), dtype = np.float64)
 
-for l in range(l_span + 1):
+for l in range(len_l+1):
     print("l= " + str(l))
-    for h in range(h_span + 1):
-        for d in range(d_span + 1): 
-            many_traj[l,h,d] = fxns.calc_trajectory(l/l_span, h/h_span, .05, .05, d, num_steps = steps)
+    for h in range(len_h+1):
+        many_traj[l,h] = fxns.calc_trajectory(l, h, .05, .05, 2, num_steps = steps)
 
-print(many_traj[5,8,2])
