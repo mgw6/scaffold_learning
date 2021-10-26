@@ -4,11 +4,12 @@ Author: MacGregor Winegard
 Date: 10/18/2021 
 """
 
+import time
 import numpy as np
 import warnings
 warnings.simplefilter("ignore") #This could be dangerous
 
-import time
+
 
 
 class vg_functions:
@@ -76,15 +77,24 @@ class kg_functions:
         
         one_trajectory[0] = [x_0, y_0]
         one_trajectory[1] = [
-        kg_functions.next_x(x_0, y_0),
-        kg_functions.next_y(x_0, y_0)
+            kg_functions.next_x(x_0, y_0),
+            kg_functions.next_y(x_0, y_0)
         ]
+        
         
         for n in range (2, num_steps+1):
             one_trajectory[n,0] = \
                 kg_functions.next_x(one_trajectory[n-1,0],one_trajectory[n-1,1])
             one_trajectory[n,1] = \
                 kg_functions.next_y(one_trajectory[n-1,0], one_trajectory[n-1,1])
+            
+            """
+            if np.isinf(one_trajectory[n,0]) and np.isinf(one_trajectory[n,1]):
+                one_trajectory[(n+1):,0] = np.inf
+                one_trajectory[(n+1):,1] = np.inf
+                break #This actually adds time. 
+            """
+            
         
         return one_trajectory
 
