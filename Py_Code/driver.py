@@ -29,9 +29,6 @@ h_span = np.arange(l_start, l_end+h_step, l_step)
 len_h = len(h_span)
 
 data = []
-
-
-
 many_traj = np.empty(shape = (len_l, len_h, steps+1, 2), dtype = np.float64)
 
 for l in range(len_l):
