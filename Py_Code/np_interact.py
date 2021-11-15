@@ -4,8 +4,11 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 import tkinter as tk
+import numpy as np
+np.set_printoptions(precision = 5)
+import numpy as np
+
 
 
 #TODO: Could add option to graph
@@ -16,6 +19,7 @@ def print_menu():
     return(int(input("Choice: ")))
     
 def get_traj_index(l_start, l_end, l_step, h_start, h_end, h_step):
+    
     print("\n\nSelect a starting l:")
     print("\tl start: " + str(l_start))
     print("\tl end: " + str(l_end))
@@ -28,8 +32,14 @@ def get_traj_index(l_start, l_end, l_step, h_start, h_end, h_step):
     print("\th step: " + str(h_step))
     h_traj = float(input("h: "))
     
-    l_traj = int((l_traj - l_start)/l_step)
-    h_traj = int((h_traj - h_start)/h_step)
+    
+    l_traj = int((l_traj - l_start)*(1/l_step))
+    h_traj = int((h_traj - h_start)*(1/h_step))
+    """
+    NOTE: These calculations are going to have a lot of error because 
+    we are are subtracting decimals. Maybe worth thinking about a 
+    better way to do it
+    """
     
     return l_traj, h_traj
 
@@ -37,12 +47,12 @@ def get_traj_index(l_start, l_end, l_step, h_start, h_end, h_step):
 if __name__ == '__main__':
     root = tk.Tk() 
     root.withdraw()  #https://www.youtube.com/watch?v=H71ts4XxWYU   
-    file_path = tk.filedialog.askopenfilename(filetypes = [('Numpy Arrays', '*.npy')],
+    file_path = tk.filedialog.askopenfilename(
+                                            filetypes = [('Numpy Arrays', '*.npy')],
                                             initialdir = "C:/Users/User/SSCH_Research/scaffold_learning/Py_Code/np_arrs",
                                             title = "Select a np.array"    
                                             )
     many_traj = np.load(file_path)
-    
     mt_shape = many_traj.shape
 
     len_l = mt_shape[0]
@@ -65,6 +75,8 @@ if __name__ == '__main__':
         
         if choice == 1:
             l_traj, h_traj = get_traj_index(l_start, l_end, l_step, h_start, h_end, h_step)
+            
+            print("Printing l index = " + str(l_traj) + ", h index = " + str(h_traj))
             
             print(many_traj[l_traj,h_traj])
         
