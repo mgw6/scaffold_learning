@@ -49,7 +49,7 @@ for l in range(len_l):
             pass
         
         
-        elif abs(many_traj[l, h, n_steps, 0] - eps) < .1 and abs(many_traj[l, h, n_steps, 1] - 1.5) < eps:
+        elif abs(many_traj[l, h, n_steps, 0] - 1.5) < eps and abs(many_traj[l, h, n_steps, 1] - 1.5) < eps:
             data.append([l_span[l], h_span[h], 'green'])
         
         
