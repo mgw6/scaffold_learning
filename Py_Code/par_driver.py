@@ -31,10 +31,7 @@ h_span = np.arange(h_start, h_end+h_step, h_step)
 len_h = len(h_span)
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 2e8cb77b9cbd4e8d4d70efbc78a703416a53c04d
 many_traj = np.empty(shape = (len_l, len_h, steps+1, 2), dtype = np.float16)
 
 
