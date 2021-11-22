@@ -16,22 +16,25 @@ eps = .1
 d = 2
 data = []
 
-steps = 300
+steps = 1000
 
 l_start = .5
 l_end = 1.5
-l_step = .001
+l_step = .01
 l_span = np.arange(l_start, l_end+l_step, l_step)
 len_l = len(l_span)
 
 h_start = 1
 h_end = 2
-h_step = .001
+h_step = .0001
 h_span = np.arange(h_start, h_end+h_step, h_step)
 len_h = len(h_span)
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2e8cb77b9cbd4e8d4d70efbc78a703416a53c04d
 many_traj = np.empty(shape = (len_l, len_h, steps+1, 2), dtype = np.float16)
 
 
@@ -40,7 +43,8 @@ for l in range(len_l):
     print("Starting " + str(l) + "/" + str(len_l) + " l's.")
     many_traj[l] = Parallel(n_jobs = -1, batch_size = 3)(
         delayed(fxns.calc_trajectory)(l_span[l], H, steps) for H in h_span)
-print(TVA.toc(start_time))
+time_elapsed = TVA.toc(start_time)
+print(time_elapsed)
 
 
 folder_name =  time.strftime("%m.%d__%H.%M.%S/")
@@ -50,6 +54,7 @@ np.save(np_folder + folder_name + "arr", many_traj)
 
 file = open((np_folder + folder_name + "notes.txt"), "w+")
 file.write("Time run: " + folder_name[:-1] + "\n")
+file.write(time_elapsed + "\n")
 file.write("====================\n")
 file.write("Number of steps: " + str(steps) + "\n\n")
 
