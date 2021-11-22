@@ -2,11 +2,11 @@ source("functions.R")
 library(ggplot2)
 
 df = data.frame(L = NULL, rep_h = NULL)
-L = seq(-4,4,by=.05)
+L = seq(-4,4,by=.1)
 eps = .1
 d = 2
 
-for (H in seq(-4,4,by=.05) )
+for (H in seq(-4,4,by=.1) )
 {
   color_list <- c()
   multi_test = many_trajectories(L, H, 1, .5, d, l_n1 = NULL, n_steps=100)
