@@ -32,9 +32,6 @@ len_h = len(h_span)
 
 
 
-
-
-
 many_traj = np.empty(shape = (len_l, len_h, steps+1, 2), dtype = np.float16)
 
 
