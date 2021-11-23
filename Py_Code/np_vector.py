@@ -46,21 +46,28 @@ end_y = []
 print("Entering for-loops")
 for l in range(len_l):
     for h in range(len_h):
-        x.append(l)
-        y.append(h)
+        x.append(l*l_step)
+        y.append(h*h_step)
         end_x.append(many_traj[l, h, n_steps, 0])
         end_y.append(many_traj[l, h, n_steps, 1])
 print("Exited for-loops")
 
+x = np.array(x), 
+y = np.array(y), 
+end_x = np.array(end_x)
+end_y = np.array(end_y)
+
+end_x = np.where(np.isnan(end_x), 0, end_x)
+end_y = np.where(np.isnan(end_y), 0, end_y)
 
 
 plt.quiver(
-            np.array(x), 
-            np.array(y), 
-            1/np.array(end_x), 
-            1/np.array(end_y)
-            #angles = "uv"
+            x, 
+            y, 
+            x/end_x,
+            y/end_y
             )
 
+#plt.axis([l_start, l_end, h_start, h_end])
 #plt.grid()
 plt.show()
