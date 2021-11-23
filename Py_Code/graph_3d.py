@@ -39,10 +39,14 @@ h_span = np.arange(h_start, h_end+h_step, h_step)
 
 z_line = np.linspace(0, n_steps, n_steps+1)
 fig = plt.figure()
-ax = plt.axes(projection='3d')
+ax = plt.axes(projection='3d',
+            xlabel = "X",
+            ylabel = "Y",
+            zlabel = "Z"
+            )
 
-many_traj = np.where(many_traj > 20, np.nan, many_traj)
-many_traj = np.where(many_traj < -20, np.nan, many_traj)
+many_traj = np.where(many_traj > 2, np.nan, many_traj)
+many_traj = np.where(many_traj < -2, np.nan, many_traj)
 
 print("Entering for-loops")
 for l in range(len_l):
