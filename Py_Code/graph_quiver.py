@@ -65,9 +65,10 @@ plt.quiver(
             x, 
             y, 
             x/end_x,
-            y/end_y
+            y/end_y,
+            headwidth = 12
             )
 
 #plt.axis([l_start, l_end, h_start, h_end])
-#plt.grid()
+plt.grid()
 plt.show()
