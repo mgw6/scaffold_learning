@@ -2,6 +2,13 @@
 #Date: 11/8/2021
 # This file reads saved numpy arrays and graphs them
 
+"""
+Note to self 11/29/2021
+
+This didn't do what I wanted it to do because of rounding error. 
+Wound up using calc_one.py instead to accomplish it WAY easier. 
+"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import tkinter as tk
