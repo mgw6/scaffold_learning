@@ -5,9 +5,15 @@ This function graphs one trajectory in 3d
 """
 import numpy as np
 np.set_printoptions(threshold = np.inf)
-from functions import kg_functions as fxns
 import matplotlib.pyplot as plt
-#from mpl_toolkits import mplot3d
+
+#https://stackoverflow.com/questions/1054271/how-to-import-a-python-class-that-is-in-a-directory-above
+import pathlib
+import sys
+_parentdir = pathlib.Path(__file__).parent.parent.resolve()
+sys.path.insert(0, str(_parentdir))
+from functions import kg_functions as fxns
+sys.path.remove(str(_parentdir))
 
 
 l_0 = float(input("Input l_0: "))
