@@ -7,6 +7,8 @@ import numpy as np
 import tkinter as tk
 import seaborn as sns
 
+import graph_utils
+
 #This loads the array
 root = tk.Tk() 
 root.withdraw()  #https://www.youtube.com/watch?v=H71ts4XxWYU   
@@ -16,34 +18,18 @@ file_path = tk.filedialog.askopenfilename(filetypes = [('Numpy Arrays', '*.npy')
                                         )
 many_traj = np.load(file_path)
 
-
-# This is where we get the dims of the array
-mt_shape = many_traj.shape
-
-len_l = mt_shape[0]
-len_h = mt_shape[1]
-n_steps = mt_shape[2] -1
-
-l_start = many_traj[0,0,0,0]
-l_end = many_traj[len_l-1,0,0,0]
-l_step = (l_end - l_start)/(len_l-1)
-l_span = np.arange(l_start, l_end+l_step, l_step)
-
-h_start = many_traj[0,0,0,1]
-h_end = many_traj[0,len_h-1,0,1]
-h_step = (h_end - h_start)/(len_h-1)
-h_span = np.arange(h_start, h_end+h_step, h_step)
+dims_dict = graph_utils.graph_dims(many_traj)
 
 #TODO: basically flatten this into a 2d array where the value at each index is the value at the end of that trajectory.
 #The issue with that is that this will not maintain the coordinates. 
 
-heat_map = np.empty(shape = (len_l,len_h), dtype = float)
+heat_map = np.empty(shape = (dims_dict['len_l'],dims_dict['len_h']), dtype = float)
 
 #TODO: This could be made so much more efficient if you just said take the top layer
 print("Entering for-loops")
-for l in range(len_l):
-    for h in range(len_h): 
-        heat_map[l,h] = many_traj[l, h, n_steps, 0]
+for l in range(dims_dict['len_l']):
+    for h in range(dims_dict['len_h']): 
+        heat_map[l,h] = many_traj[l, h, dims_dict['n_steps'], 0]
 print("Exiting for-loops")
 
 """
