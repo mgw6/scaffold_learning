@@ -1,6 +1,6 @@
 #Author: MacGregor Winegard
 #Date: 10/25/2021
-# This file reads saved numpy arrays and graphs them
+# This file reads saved numpy arrays and graphs the basin of attraction.
 
 import pandas as pd
 import matplotlib.pyplot as plt

@@ -45,8 +45,8 @@ ax = plt.axes(projection='3d',
             zlabel = "Z"
             )
 
-many_traj = np.where(many_traj > 2, np.nan, many_traj)
-many_traj = np.where(many_traj < -2, np.nan, many_traj)
+many_traj = np.where(many_traj > 10, np.nan, many_traj)
+many_traj = np.where(many_traj < -10, np.nan, many_traj)
 
 print("Entering for-loops")
 for l in range(len_l):

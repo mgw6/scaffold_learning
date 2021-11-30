@@ -16,6 +16,8 @@ n_steps = int(input("Num steps: "))
 
 result = fxns.calc_trajectory(l_0, h_0, n_steps)
 
+print("Here is the trajectory:")
+print(result)
 
 print("Plotting")
 fig = plt.figure()
@@ -27,5 +29,3 @@ ax.plot3D(
         )   
 plt.show()
 
-print("Here is the trajectory:")
-print(result)
