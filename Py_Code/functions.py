@@ -54,7 +54,7 @@ class vg_functions:
 
 
 class kg_functions:
-    #These are the functions outlined in the original Van Geert paper
+    #These are the dummy functions designed by Dr. Kris Green
     def next_x(x_n, y_n): 
         try:
             return 2*x_n - y_n
