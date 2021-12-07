@@ -16,7 +16,7 @@ eps = .1
 d = 2
 data = []
 
-n_steps = 100
+
 
 l_start = float(input("x start: "))
 l_end = float(input("x end: "))
@@ -24,7 +24,9 @@ l_end = float(input("x end: "))
 h_start = float(input("y start: "))
 h_end = float(input("y end: "))
 
-step_sz = float(input("Step size: "))
+step_sz = float(input("Initial point steps: "))
+
+n_steps = float(input("number of steps in traj: "))
 
 l_span = np.arange(l_start, l_end+step_sz, step_sz)
 len_l = len(l_span)
