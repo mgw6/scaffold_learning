@@ -74,9 +74,7 @@ class kg_functions:
     def calc_trajectory(x_0, y_0, num_steps = 1000):
         
         one_trajectory = np.empty(shape = (num_steps+1,2), dtype = np.float64)
-        
-        one_trajectory[0] = [x_0, y_0]
-        
+        one_trajectory[0] = [x_0, y_0]  
         
         for n in range (1, num_steps+1):
             one_trajectory[n,0] = \
@@ -90,8 +88,6 @@ class kg_functions:
                 one_trajectory[(n+1):,1] = np.inf
                 break #This actually adds time. 
             """
-            
-        
         return one_trajectory
 
 class TVA: #TIME VARIANCE AUTHORITY
