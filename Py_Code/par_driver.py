@@ -26,7 +26,7 @@ h_end = float(input("y end: "))
 
 step_sz = float(input("Initial point steps: "))
 
-n_steps = float(input("number of steps in traj: "))
+n_steps = int(input("number of steps in traj: "))
 
 l_span = np.arange(l_start, l_end+step_sz, step_sz)
 len_l = len(l_span)

@@ -30,6 +30,10 @@ end_y = []
 print("Entering for-loops")
 for l in range(dims_dict['len_l']):
     for h in range(dims_dict['len_h']):
+        
+        if not np.isfinite(many_traj[l, h, dims_dict['n_steps'], 0]):
+            continue
+    
         x.append(l*dims_dict['l_step'])
         y.append(h*dims_dict['h_step'])
         end_x.append(many_traj[l, h, dims_dict['n_steps'], 0])
@@ -41,16 +45,13 @@ y = np.array(y),
 end_x = np.array(end_x)
 end_y = np.array(end_y)
 
-end_x = np.where(np.isnan(end_x), 0, end_x)
-end_y = np.where(np.isnan(end_y), 0, end_y)
-
 
 plt.quiver(
             x, 
             y, 
-            x/end_x,
-            y/end_y,
-            headwidth = 12
+            end_x - x,
+            end_y - y,
+            #headwidth = 12
             )
 
 #plt.axis([l_start, l_end, h_start, h_end])
