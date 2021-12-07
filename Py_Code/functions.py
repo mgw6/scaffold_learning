@@ -76,13 +76,9 @@ class kg_functions:
         one_trajectory = np.empty(shape = (num_steps+1,2), dtype = np.float64)
         
         one_trajectory[0] = [x_0, y_0]
-        one_trajectory[1] = [
-            kg_functions.next_x(x_0, y_0),
-            kg_functions.next_y(x_0, y_0)
-        ]
         
         
-        for n in range (2, num_steps+1):
+        for n in range (1, num_steps+1):
             one_trajectory[n,0] = \
                 kg_functions.next_x(one_trajectory[n-1,0],one_trajectory[n-1,1])
             one_trajectory[n,1] = \
