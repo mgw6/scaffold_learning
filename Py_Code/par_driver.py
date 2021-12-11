@@ -1,20 +1,11 @@
 import time
 from joblib import Parallel, delayed
-
+import os
 import numpy as np
 np.set_printoptions(threshold = np.inf)
-import os
-import pandas as pd
-import matplotlib.pyplot as plt
 
 from functions import kg_functions as fxns
 from functions import TVA
-
-np_folder = "np_arrs/"
-
-eps = .1
-d = 2
-data = []
 
 
 l_start = float(input("x start: "))
@@ -43,7 +34,9 @@ time_elapsed = TVA.toc(start_time)
 print(time_elapsed)
 
 
+np_folder = "np_arrs/"
 folder_name =  time.strftime("%m.%d__%H.%M.%S/")
+
 os.mkdir(np_folder + folder_name)
 np.save(np_folder + folder_name + "arr", many_traj)
 
@@ -52,12 +45,12 @@ file = open((np_folder + folder_name + "notes.txt"), "w+")
 file.write("Time run: " + folder_name[:-1] + "\n")
 file.write(time_elapsed + "\n")
 file.write("====================\n")
+
 file.write("Number of n_steps: " + str(n_steps) + "\n")
 file.write("Step size: " + str(step_sz) + "\n\n")
 
 file.write("l_start: " + str(l_start) + "\n")
 file.write("l_end: " + str(l_end) + "\n")
-
 
 file.write("h_start: " + str(h_start) + "\n")
 file.write("h_end: " + str(h_end) + "\n")
