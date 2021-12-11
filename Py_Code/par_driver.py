@@ -17,7 +17,6 @@ d = 2
 data = []
 
 
-
 l_start = float(input("x start: "))
 l_end = float(input("x end: "))
 
@@ -25,19 +24,15 @@ h_start = float(input("y start: "))
 h_end = float(input("y end: "))
 
 step_sz = float(input("Initial point steps: "))
-
 n_steps = int(input("number of steps in traj: "))
 
 l_span = np.arange(l_start, l_end+step_sz, step_sz)
 len_l = len(l_span)
 
-
 h_span = np.arange(h_start, h_end+step_sz, step_sz)
 len_h = len(h_span)
 
-
 many_traj = np.empty(shape = (len_l, len_h, n_steps+1, 2), dtype = np.float16)
-
 
 start_time = TVA.tic()
 for l in range(len_l):
